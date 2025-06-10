@@ -11,6 +11,35 @@ A RESTful API for a book review application built with Node.js, Express, and Mon
 - JWT Authentication
 - bcryptjs for password hashing
 
+## Database Schema Design
+
+### Collections & Relationships
+
+```ascii
++-------------+       +-------------+       +-------------+
+|    User     |       |    Book     |       |   Review    |
++-------------+       +-------------+       +-------------+
+| _id         |<----->| _id         |<----->| _id         |
+| username    |       | title       |       | book        |
+| email       |       | author      |       | user        |
+| password    |       | genre       |       | rating      |
+| timestamps  |       | description |       | comment     |
++-------------+       | avgRating   |       | timestamps  |
+                      | totalReviews|       +-------------+
+                      | timestamps  |
+                      +-------------+
+```
+
+### Key Features
+
+- All collections include timestamps (createdAt, updatedAt)
+- Reviews are linked to both books and users via ObjectId references
+- Text search enabled on book title and author
+- Unique constraint ensures one review per user per book
+- Average rating and total reviews are maintained on the book document
+- Passwords are hashed before storage
+- Email addresses are stored in lowercase
+
 ## Project Setup
 
 1. Clone the repository
